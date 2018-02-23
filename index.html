@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+</head>
+<body>
+  <div id="chart"></div> 
+</body>
+<script src="js/d3.js"></script>
+<script src="js/d3.dependencyWheel.js"></script>
+<script>
+ 	var chart = d3.chart.dependencyWheel();
+	 
+	var data = {
+		packageNames: ['A', 'B', 'C', 'D', 'E'], 
+		matrix: [[1, 0, 0, 0, 0], 	// A Depende de A
+						 [0, 0, 0, 1, 0], 	// B depende de D 
+						 [0, 1, 1, 1, 0],		// C depende de B,C,D
+						 [0, 0, 0, 1, 1],		// D depende de D,E
+						 [0, 0, 0, 0, 0]]		// E es independiente
+	};
+
+	var chart = d3.chart.dependencyWheel()
+		.width(700)    // also used for height, since the wheel is in a a square
+		.margin(150)   // used to display package names
+		.padding(.02); // separating groups in the wheel
+
+	d3.select('#chart')
+		.datum(data)
+		.call(chart);
+</script>
+</html>
